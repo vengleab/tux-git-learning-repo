@@ -6,6 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: develop
     steps:
       - name: List Directory before checkout
         run: |
@@ -18,6 +19,9 @@ jobs:
         run: echo "List directory after checkout" && ls -a
 
       - name: Deploy to server
+        env: 
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          ssh  ubuntu@192.168.240.145  "rm -rf /home/website/facebook1.com/"
-          scp -r . ubuntu@192.168.240.145:/home/website/facebook1.com
+          echo $SSH_PRIVATE_KEY > ~/.ssh/id_rsa
+          ssh  ubuntu@0.tcp.ap.ngrok.io  "rm -rf /home/website/facebook1.com/"
+          scp -r . -p 18913 ubuntu@0.tcp.ap.ngrok.io:/home/website/facebook1.com/
