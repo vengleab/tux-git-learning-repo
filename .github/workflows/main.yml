@@ -16,3 +16,8 @@ jobs:
 
       - name: List director after checkout 
         run: echo "List directory after checkout" && ls -a
+
+      - name: Deploy to server
+        run: |
+          ssh  ubuntu@192.168.240.145  "rm -rf /home/website/facebook1.com/"
+          scp -r . ubuntu@192.168.240.145:/home/website/facebook1.com
