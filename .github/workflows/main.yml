@@ -26,5 +26,5 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no -p 18913  ubuntu@0.tcp.ap.ngrok.io "rm -rf /home/website/facebook1.com/"
-          scp -o StrictHostKeyChecking=no -P 18913 -r . ubuntu@0.tcp.ap.ngrok.io:/home/website/facebook1.com
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 18913  ubuntu@0.tcp.ap.ngrok.io "rm -rf /home/website/facebook1.com/"
+          # scp -o StrictHostKeyChecking=no -P 18913 -r . ubuntu@0.tcp.ap.ngrok.io:/home/website/facebook1.com
