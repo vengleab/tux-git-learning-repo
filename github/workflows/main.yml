@@ -1,0 +1,16 @@
+name: Deploy to server
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Directory before checkout
+        run: |
+         echo "List directory before checkout"
+         ls -la
+      
+      - name: actions/checkout@v3
+        run: echo "List directory after checkout" && ls -a
