@@ -11,6 +11,8 @@ jobs:
         run: |
          echo "List directory before checkout"
          ls -la
-      
-      - name: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+
+      - name: List director after checkout 
         run: echo "List directory after checkout" && ls -a
