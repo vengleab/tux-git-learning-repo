@@ -22,7 +22,7 @@ jobs:
         env: 
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir -p /home/runner/
+          mkdir -p /home/runner/.ssh
           echo $SSH_PRIVATE_KEY > /home/runner/.ssh/id_rsa
           ssh -i /home/runner/.ssh/id_rsa ubuntu@0.tcp.ap.ngrok.io  "rm -rf /home/website/facebook1.com/"
           scp -i /home/runner/.ssh/id_rsa -r . -p 18913 ubuntu@0.tcp.ap.ngrok.io:/home/website/facebook1.com/
