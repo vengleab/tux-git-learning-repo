@@ -21,9 +21,13 @@ jobs:
       - name: Deploy to server
         env: 
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOYMENT_DIRECTORY: ${{ vars.DEPLOYMENT_DIRECTORY }}
+          SSH_HOST: ${{ vars.SSH_HOST }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_HOST_PORT: ${{ vars.SSH_HOST_PORT }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 18099  ubuntu@0.tcp.ap.ngrok.io "rm -rf /home/website/facebook1.com/"
-          scp -r -P 18099 -o StrictHostKeyChecking=no ./* ubuntu@0.tcp.ap.ngrok.io:/home/website/facebook1.com
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SSH_HOST_PORT  $SSH_USER@$SSH_HOST "rm -rf $DEPLOYMENT_DIRECTORY"
+          scp -r -P $SSH_HOST_PORT -o StrictHostKeyChecking=no ./* $SSH_USER@$SSH_HOST:$DEPLOYMENT_DIRECTORY
