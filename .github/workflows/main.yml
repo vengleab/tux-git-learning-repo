@@ -30,4 +30,6 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SSH_HOST_PORT  $SSH_USER@$SSH_HOST "rm -rf $DEPLOYMENT_DIRECTORY"
+          
           scp -r -P $SSH_HOST_PORT -o StrictHostKeyChecking=no ./* $SSH_USER@$SSH_HOST:$DEPLOYMENT_DIRECTORY
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p $SSH_HOST_PORT  $SSH_USER@$SSH_HOST "chmod 755 -R $DEPLOYMENT_DIRECTORY"
